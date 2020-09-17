@@ -98,13 +98,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://13.235.76.42:8081/repository/flipcat-release/</url>
+	      <url>http://13.235.77.222:8081/repository/astarazenica-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.235.76.42:8081/repository/flipcart-snapshort/</url>
+	      <url>http://13.235.77.222:8081/repository/astrazenica-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
