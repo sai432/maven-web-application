@@ -31,7 +31,7 @@
 	<repositories>
 		<repository>
 		<id>nexus</id>
-		<url> http://13.235.49.234:8081/</url>
+		<url> http://13.235.49.234:8081/repository/maven-proxy-repo/</url>
 		</repository>
 	</repositories>
 
