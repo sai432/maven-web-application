@@ -28,6 +28,12 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 	</properties>
+	<repositories>
+		<repository>
+		<id>nexus</id>
+		<url> http://13.235.49.234:8081/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		
