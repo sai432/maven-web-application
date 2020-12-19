@@ -104,13 +104,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Releases Nexus Repository</name>
-	      <url>http://13.235.49.234:8081/repository/maven-proxy-repo/</url>
+	      <url>http://13.235.49.234:8081/repository/maven-hosted-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://13.235.49.234:8081/repository/maven-proxy1-repo/</url>
+	      <url>http://13.235.49.234:8081/repository/maven-hosted-release/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
