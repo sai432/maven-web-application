@@ -1,45 +1,51 @@
 node('master'){
-     echo "GitHub BranhName ${env.BRANCH_NAME}"
-  echo "Jenkins Job Number ${env.BUILD_NUMBER}"
-  echo "Jenkins Node Name ${env.NODE_NAME}"
-  
-  echo "Jenkins Home ${env.JENKINS_HOME}"
-  echo "Jenkins URL ${env.JENKINS_URL}"
-  echo "JOB Name ${env.JOB_NAME}"
-  
-     properties([
-    buildDiscarder(logRotator(numToKeepStr: '3')),
-    pipelineTriggers([
-        pollSCM('* * * * *')
+    
+    echo "GitHub BranchName ${env.BRANCH_NAME}"
+    echo "Jenkins Job Number ${env.BUILD_NUMBER}"
+    echo "Jenkins Node Name ${env.NAME_NAME}"
+    
+    echo "Jenkins Name ${env.JENKINS_NAME}"
+    echo "Jenkins URL ${env.JENKINS_URL}"
+    echo "Job Name ${env.JOB_NAME}"
+    
+    def mavenHome = tool name: "Maven3.6.3"
+    
+    properties([
+        buildDiscarder(logRotator(numToKeepStr: '3')),
+        pipelineTriggers([
+            pollSCM('* * * * *')
+    
     ])
-  ])
-  
-def mavenHome = tool name: "maven3.6.3"
-stage('Checkout Code'){
-   git credentialsId: '6b54cc0b-ed10-4348-a8e4-007c405bb7b8', url: 'https://github.com/sai432/maven-web-application.git'
-    }
-stage('Build '){
-	sh "${mavenHome}/bin/mvn clean package"
-	}
-	stage('SonarQube Report'){
-	sh "${mavenHome}/bin/mvn sonar:sonar"
-	}
-stage('Store Nexus reso'){
-	sh "${mavenHome}/bin/mvn deploy"
-	}
-	stage('deploy to war file tomcat'){
-
-   sshagent(['a59ab86b-6b3a-4033-a108-6051f5de40f1']) {
-   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@15.207.113.165:/opt/apache-tomcat-9.0.39/webapps/"
-
-}
-}
-stage('Sending Email Notification'){
-emailext body: '''Build is Over
-Regards
-kondalarao
-9908711796''', subject: 'Build is Over', to: 'kondalu432@gmail.com'
-
+        
+        
+    ])
+    
+stage('Checkout the Code'){
+    
+    git credentialsId: '82939d94-9c11-4090-8e0b-6431ec22d09c', url: 'https://github.com/sai432/maven-web-application.git'
+    
+  }
+ stage('build the artifactory'){
+     
+     //sh "mvn clean package"
+     sh "${mavenHome}/bin/mvn clean package"
+ }
+ stage('SonarQube Report'){
+     sh "${mavenHome}/bin/mvn sonar:sonar"
+ }
+ stage('Nexes Report'){
+     sh "${mavenHome}/bin/mvn clean deploy"
+ }
+ sshagent(['b400fd97-190c-4a44-9aca-3f1ee2520962']) {
+ sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.9.49:/opt/apache-tomcat-8.5.61/webapps/"
 }
 
 }
+stage('Send a Email Notifaction'){
+    emailext body: '''Build is Over
+
+Regard,
+konnda,
+9908711796''', subject: 'Build is Over', to: 'kondalu432@gmail.com,kondalarao0164@gmail.com'
+}
+    
